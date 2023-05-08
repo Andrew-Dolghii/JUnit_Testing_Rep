@@ -1,0 +1,129 @@
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class TestingPractiseTest {
+    private int num1;
+    private int num2;
+
+    private String word;
+
+    private int[] numberArray;
+    private int value;
+
+    private String name;
+    private int age;
+    private int yearOfBirth;
+    private String gender;
+
+    private Human human;
+    private Human human1;
+    private Human human2;
+
+    @Before
+    public void setUp() throws Exception {
+        num1 = 9;
+        num2 = 4;
+
+        word = "abcd";
+
+        numberArray = new int[]{1, 2, 3, 4};
+        value = 50;
+
+        name = "Peter";
+        age = 10;
+        yearOfBirth = 0;
+        gender = "male";
+
+        human = new Human("Justin", 23, 2000, "male");
+        human1 = new Human("Mary", 20, 2003, "female");
+        human2 = new Human("Alisha", 17, 2006, "female");
+
+    }
+
+    @Test
+    public void testLargest() {
+        //pegged against math
+        int expected = Math.max(num1, num2);
+
+        int actual = TestingPractise.largest(num1, num2);
+
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testAlphabeticalOrder(){
+        boolean expected = true;
+
+        boolean actual = TestingPractise.alphabeticalOrder(word);
+
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testProductSumGreater() {
+        boolean expected = false;
+
+        boolean actual = TestingPractise.productSumGreater(numberArray, value);
+
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testChangeHuman() {
+        Human expected = new Human("Test", age * 2, yearOfBirth * 2, "Test");
+
+        Human actual = TestingPractise.changeHuman(new Human(name, age, yearOfBirth, gender));
+
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testGetByGender() {
+        List<Human> expected = List.of(human1, human2);
+
+        List<Human> actual = new ArrayList<>();
+        actual.add(human);
+        actual.add(human1);
+        actual.add(human2);
+
+        actual = TestingPractise.getByGender("female");
+
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testGetByAge() {
+        List<Human> expected = List.of(human);
+
+        List<Human> actual = new ArrayList<>();
+        actual.add(human);
+        actual.add(human1);
+        actual.add(human2);
+
+        actual = TestingPractise.getOlderAge(21);
+
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testGetAverageAgeHumans() {
+        List<Human> humans = new ArrayList<>();
+        humans.add(human);
+        humans.add(human1);
+        humans.add(human2);
+
+        int expected = 0;
+        for(Human human : humans){
+            expected += human.getAge();
+        }
+        expected /= humans.size();
+
+        int actual = TestingPractise.getAverageAgeHumans();
+
+        Assert.assertEquals(expected, actual);
+    }
+}
